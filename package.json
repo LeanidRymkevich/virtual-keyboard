@@ -4,6 +4,7 @@
   "description": "_**The virtual-keboard task**_",
   "main": "index.js",
   "scripts": {
+    "eslint": "npx eslint js/",
     "style": "sass --watch scss/style.scss style.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/LeanidRymkevich/virtual-keyboard/issues"
   },
-  "homepage": "https://github.com/LeanidRymkevich/virtual-keyboard#readme"
+  "homepage": "https://github.com/LeanidRymkevich/virtual-keyboard#readme",
+  "devDependencies": {
+    "eslint": "^8.39.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5"
+  }
 }
