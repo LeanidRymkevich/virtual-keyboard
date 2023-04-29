@@ -12,6 +12,7 @@ html{
 body {
   margin: 0;
   padding-top: 10px;
+  background-color: $color-body-background;
 }
 
 .container {
@@ -33,6 +34,7 @@ body {
 
   &:focus{
     background-color: $color-display-focused;
+    border: 2px solid $color-border;
   }
 }
 
@@ -43,6 +45,7 @@ body {
   background-color: $color-keyboard-background;
   border-radius: 10px;
   padding: $padding-keyboard;
+  border: 2px solid $color-border;
 }
 
 .keyboard__row{
