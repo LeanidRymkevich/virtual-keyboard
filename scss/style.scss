@@ -1,5 +1,109 @@
-@import "second";
+@import "variables.scss";
+@import "mixins.scss";
 
-body{
-  background-color: $color-red;
+* {
+  box-sizing: border-box;
+}
+
+html{
+  font-size: 10px;
+}
+
+body {
+  margin: 0;
+  padding-top: 10px;
+}
+
+.container {
+  @include flex-container();
+  margin: 0 auto;
+  width: $width-container;
+  gap: $gap-container;
+}
+
+.display {
+  width: 100%;
+  height: $height-display;
+  padding: $padding-display;
+  @include font($font-family: $font-text, $font-size: 2.5rem, $color: $color-text);
+  background-color: $color-display-background;
+  border: 2px solid $color-border;
+  border-radius: 5px;
+  transition: all .3s ease;
+
+  &:focus{
+    background-color: $color-display-focused;
+  }
+}
+
+.keyboard {
+  @include flex-container();
+  width: 100%;
+  gap: $gap-keyboard;
+  background-color: $color-keyboard-background;
+  border-radius: 10px;
+  padding: $padding-keyboard;
+}
+
+.keyboard__row{
+  @include flex-container($direction: row, $justify-content: space-between);
+  width: 100%;
+  gap: $gap-keyboard;
+}
+
+.keyboard__button {
+  width: $width-btn-odinary;
+  height: $height-btn;
+  flex-grow: 0;
+  padding: $padding-keyboard-btn;
+  outline: none;
+  border: 1px solid $color-border;
+  border-radius: 10px;
+  background-color: $color-btn-odinary;
+  @include font($font-family: $font-btn-text, $font-size: 1.5rem, $font-style: italic, $color: $color-btn-text);
+  transition: filter .8s ease, box-shadow .3s ease;
+
+  &_special{
+    background-color: $color-btn-special;
+  }
+
+  &_enter,
+  &_shift,
+  &_caps-lock,
+  &_backspace,
+  &_tab{
+    flex-grow: 2;
+  }
+
+  &_ctrl,
+  &_alt,
+  &_win{
+    flex-grow: 1;
+  }
+
+  &_space{
+    flex-grow: 28;
+  }
+
+  &:hover {
+    cursor: pointer;
+    filter: saturate(180%);
+  }
+
+  &_active {
+    filter: saturate(180%);
+    box-shadow: 0px 0px 1px 1px black;
+  }
+}
+
+.info{
+  @include flex-container();
+  gap: $gap-container;
+}
+
+.info__row{
+  margin: 0;
+  padding: 0;
+  @include font($font-family: $font-text, $font-size: 2.5rem, $color: $color-text);
+  text-align: center;
 }

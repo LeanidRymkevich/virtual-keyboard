@@ -1,0 +1,29 @@
+$color-keyboard-background: rgb(23, 103, 128);
+$color-display-background: rgba(128 128 128 / 14%);
+$color-btn-special: rgb(38 149 101);
+$color-btn-odinary: rgb(29 202 127);
+$color-btn-text: rgb(255, 255, 255);
+$color-border: rgb(0, 0, 0);
+$color-text: rgb(160 42 42);
+
+$color-display-focused: rgb(128 128 128 / 27%);
+
+$font-btn-text: Arial, Helvetica, sans-serif;
+$font-text: Georgia, 'Times New Roman', Times, serif;
+
+$width-btn-odinary: 50px;
+
+$height-btn: 50px;
+$height-display: 220px;
+
+$gap-container: 10px;
+$gap-keyboard: 10px;
+
+$padding-keyboard: 10px;
+$padding-display: 10px;
+$padding-keyboard-btn: 5px;
+
+$width-container: calc($width-btn-odinary * 11 + ($width-btn-odinary * 2) * 2 + 
+                       $gap-keyboard * 12 + $padding-keyboard * 2);
+
+
