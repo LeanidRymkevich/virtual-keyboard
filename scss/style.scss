@@ -65,7 +65,7 @@ body {
   border-radius: 10px;
   background-color: $color-btn-odinary;
   @include font($font-family: $font-btn-text, $font-size: 1.5rem, $font-style: italic, $color: $color-btn-text);
-  transition: filter .3s ease, box-shadow .3s ease;
+  transition: filter .3s ease, transform .3s ease;
 
   &_special{
     background-color: $color-btn-special;
@@ -96,7 +96,7 @@ body {
 
   &_active {
     filter: saturate(250%);
-    box-shadow: 0px 0px 1px 1px black;
+    transform: scale(0.95);
   }
 }
 

@@ -143,6 +143,9 @@ export default class KeyboardLogic {
 
   displayInput(keyboardButton, buttonCode) {
     const display = document.querySelector('.display');
+    const start = display.selectionStart;
+    const end = display.selectionEnd;
+
     if (!this.keyboard.specialBtns.includes(buttonCode)) {
       display.value += keyboardButton.textContent;
     } else if (buttonCode === 'Tab') {
@@ -150,16 +153,26 @@ export default class KeyboardLogic {
     } else if (buttonCode === 'Enter') {
       display.value += '\n';
     } else if (buttonCode === 'Backspace') {
-      const start = display.selectionStart;
-      if (start !== 0) {
-        display.value = display.value.slice(0, start - 1) + (display.value[start] ? display.value.slice(start) : '');
-        display.selectionStart = start - 1;
-        display.selectionEnd = start - 1;
+      if (start === end) {
+        if (start !== 0) {
+          display.value = display.value.slice(0, start - 1) + (display.value[start] ? display.value.slice(start) : '');
+          display.selectionStart = start - 1;
+          display.selectionEnd = start - 1;
+        }
+      } else {
+        display.value = display.value.slice(0, start) + display.value.slice(end);
+        display.selectionStart = start;
+        display.selectionEnd = start;
       }
     } else if (buttonCode === 'Delete') {
-      if (display.value.length !== 0) {
-        const start = display.selectionStart;
-        display.value = display.value.slice(0, start) + (display.value[start + 1] ? display.value.slice(start + 1) : '');
+      if (start === end) {
+        if (display.value.length !== 0) {
+          display.value = display.value.slice(0, start) + (display.value[start + 1] ? display.value.slice(start + 1) : '');
+          display.selectionStart = start;
+          display.selectionEnd = start;
+        }
+      } else {
+        display.value = display.value.slice(0, start) + display.value.slice(end);
         display.selectionStart = start;
         display.selectionEnd = start;
       }
