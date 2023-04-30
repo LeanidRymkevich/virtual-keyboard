@@ -52,8 +52,8 @@ export default class Keyboard {
   renderLangMap(where, lang, isShiftPressed = false, isCapslockPressed = false) {
     const buttons = where.querySelectorAll('.keyboard__button');
     const langMap = this.langMaps.get(lang);
-    let buttonValues;
 
+    let buttonValues;
     if (isShiftPressed) {
       buttonValues = langMap.shift;
     } else {
