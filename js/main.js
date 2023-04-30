@@ -1,21 +1,14 @@
 import Keyboard from './Keyboard.js';
-import { enLayout, ruLayout, btnCodes } from './keyboard-layouts.js';
+import {
+  enLayout, ruLayout, btnCodes, btnSpecialCodes,
+} from './keyboard-layouts.js';
 
 const body = document.querySelector('body');
-const keyboard = new Keyboard('standart', 'english');
+const keyboardObj = new Keyboard(btnCodes, btnSpecialCodes);
 
-keyboard.renderKeyboard(body);
+keyboardObj.addLangMap('en', enLayout);
+keyboardObj.addLangMap('ru', ruLayout);
 
-keyboard.lang = 'ru';
-
-keyboard.renderKeyboard(body);
-// keyboard.addEventListener('click', (event) => {
-//   const button = event.target.closest('.keyboard__button');
-//   if (button) {
-//     button.classList.toggle('keyboard__button_active');
-//   }
-// });
-
-console.log(enLayout);
-console.log(ruLayout);
-console.log(btnCodes);
+body.append(keyboardObj.getEmptyKeyboard());
+const keyboard = document.querySelector('.keyboard');
+keyboardObj.renderLangMap(keyboard, 'en', true, true);
