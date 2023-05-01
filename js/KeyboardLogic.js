@@ -28,7 +28,7 @@ export default class KeyboardLogic {
       if (event.target === document.querySelector('.display')) event.preventDefault();
       if (!this.keyboard.layout.join().split(',').includes(buttonCode)) return;
       if (buttonCode.includes('Alt') || buttonCode === 'Tab') event.preventDefault();
-      if (event.repeat) this.repeat = true;
+      this.repeat = event.repeat;
       const keyboardButton = this.keyboardLayout.querySelector(`[data--btn-code=${buttonCode}]`);
       this.downHandler(keyboardButton, buttonCode, event);
     });
@@ -73,7 +73,7 @@ export default class KeyboardLogic {
   }
 
   downHandler(keyboardButton, buttonCode) {
-    if (buttonCode === 'CapsLock') {
+    if (buttonCode === 'CapsLock' && !this.repeat) {
       this.isCapslockPressed = !this.isCapslockPressed;
       keyboardButton.classList.toggle('keyboard__button_active');
       this.keyboard.renderLangMap(
