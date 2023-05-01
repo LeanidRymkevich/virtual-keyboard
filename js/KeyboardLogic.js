@@ -9,6 +9,7 @@ export default class KeyboardLogic {
     this.altPressed = '';
     this.PARAGRAPHS = PARAGRAPHS;
     this.mouseDownButton = null;
+    this.repeat = false;
   }
 
   buttonDownHandler() {
@@ -27,9 +28,9 @@ export default class KeyboardLogic {
       if (event.target === document.querySelector('.display')) event.preventDefault();
       if (!this.keyboard.layout.join().split(',').includes(buttonCode)) return;
       if (buttonCode.includes('Alt') || buttonCode === 'Tab') event.preventDefault();
-      if ((this.isCtrlPressed || this.isAltPressed) && event.repeat) return;
+      if (event.repeat) this.repeat = true;
       const keyboardButton = this.keyboardLayout.querySelector(`[data--btn-code=${buttonCode}]`);
-      this.downHandler(keyboardButton, buttonCode);
+      this.downHandler(keyboardButton, buttonCode, event);
     });
   }
 
@@ -60,14 +61,10 @@ export default class KeyboardLogic {
       if (this.mouseDownButton) {
         if (!keyboardButton) {
           this.mouseDownButton.classList.remove('keyboard__button_active');
-          console.log(this.mouseDownButton);
-          console.log(keyboardButton);
           return;
         }
         if (this.mouseDownButton !== keyboardButton) {
           this.mouseDownButton.classList.remove('keyboard__button_active');
-          console.log(this.mouseDownButton);
-          console.log(keyboardButton);
         }
         const buttonCode = keyboardButton.dataset.BtnCode;
         this.upHandler(keyboardButton, buttonCode);
@@ -105,14 +102,14 @@ export default class KeyboardLogic {
       }
     }
 
-    if (buttonCode.includes('Control')) {
+    if (buttonCode.includes('Control') && !this.repeat) {
       this.ctrlPressed = buttonCode.replace('Control', '');
       if (this.altPressed === this.ctrlPressed) {
         changeLang.bind(this)();
       }
     }
 
-    if (buttonCode.includes('Alt')) {
+    if (buttonCode.includes('Alt') && !this.repeat) {
       this.altPressed = buttonCode.replace('Alt', '');
       if (this.altPressed === this.ctrlPressed) {
         changeLang.bind(this)();
@@ -139,10 +136,12 @@ export default class KeyboardLogic {
 
     if (buttonCode.includes('Control')) {
       this.ctrlPressed = '';
+      this.repeat = false;
     }
 
     if (buttonCode.includes('Alt')) {
       this.altPressed = '';
+      this.repeat = false;
     }
 
     if (buttonCode.includes('Shift')) {
