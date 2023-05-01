@@ -5,8 +5,8 @@ export default class KeyboardLogic {
     this.keyboardLayout = keyboardLayout;
     this.isShiftPressed = false;
     this.isCapslockPressed = false;
-    this.isCtrlPressed = false;
-    this.isAltPressed = false;
+    this.ctrlPressed = '';
+    this.altPressed = '';
     this.PARAGRAPHS = PARAGRAPHS;
   }
 
@@ -91,15 +91,15 @@ export default class KeyboardLogic {
     }
 
     if (buttonCode.includes('Control')) {
-      this.isCtrlPressed = true;
-      if (this.isAltPressed) {
+      this.ctrlPressed = buttonCode.replace('Control', '');
+      if (this.altPressed === this.ctrlPressed) {
         changeLang.bind(this)();
       }
     }
 
     if (buttonCode.includes('Alt')) {
-      this.isAltPressed = true;
-      if (this.isCtrlPressed) {
+      this.altPressed = buttonCode.replace('Alt', '');
+      if (this.altPressed === this.ctrlPressed) {
         changeLang.bind(this)();
       }
     }
@@ -123,11 +123,11 @@ export default class KeyboardLogic {
     }
 
     if (buttonCode.includes('Control')) {
-      this.isCtrlPressed = false;
+      this.ctrlPressed = '';
     }
 
     if (buttonCode.includes('Alt')) {
-      this.isAltPressed = false;
+      this.altPressed = '';
     }
 
     if (buttonCode.includes('Shift')) {
