@@ -1,0 +1,113 @@
+@import "variables.scss";
+@import "mixins.scss";
+
+* {
+  box-sizing: border-box;
+}
+
+html{
+  font-size: 10px;
+}
+
+body {
+  margin: 0;
+  padding-top: 10px;
+  background-color: $color-body-background;
+}
+
+.container {
+  @include flex-container();
+  margin: 0 auto;
+  width: $width-container;
+  gap: $gap-container;
+}
+
+.display {
+  width: 100%;
+  height: $height-display;
+  padding: $padding-display;
+  @include font($font-family: $font-text, $font-size: 2.5rem, $color: $color-text);
+  background-color: $color-display-background;
+  border: 2px solid $color-border;
+  border-radius: 5px;
+  resize: none;
+  transition: all .3s ease;
+
+  &:focus{
+    background-color: $color-display-focused;
+    border: 2px solid $color-border;
+  }
+}
+
+.keyboard {
+  @include flex-container();
+  width: 100%;
+  gap: $gap-keyboard;
+  background-color: $color-keyboard-background;
+  border-radius: 10px;
+  padding: $padding-keyboard;
+  border: 2px solid $color-border;
+}
+
+.keyboard__row{
+  @include flex-container($direction: row, $justify-content: space-between);
+  width: 100%;
+  gap: $gap-keyboard;
+}
+
+.keyboard__button {
+  width: $width-btn-odinary;
+  height: $height-btn;
+  flex-grow: 0;
+  padding: $padding-keyboard-btn;
+  outline: none;
+  border: 1px solid $color-border;
+  border-radius: 10px;
+  background-color: $color-btn-odinary;
+  @include font($font-family: $font-btn-text, $font-size: 1.5rem, $font-style: italic, $color: $color-btn-text);
+  transition: filter .3s ease, transform .3s ease;
+
+  &_special{
+    background-color: $color-btn-special;
+  }
+
+  &_enter,
+  &_shift,
+  &_capslock,
+  &_backspace,
+  &_tab{
+    flex-grow: 2;
+  }
+
+  &_ctrl,
+  &_alt,
+  &_win{
+    flex-grow: 1;
+  }
+
+  &_space{
+    flex-grow: 28;
+  }
+
+  &:hover {
+    cursor: pointer;
+    filter: saturate(250%);
+  }
+
+  &_active {
+    filter: saturate(250%);
+    transform: scale(0.95);
+  }
+}
+
+.info{
+  @include flex-container();
+  gap: $gap-container;
+}
+
+.info__row{
+  margin: 0;
+  padding: 0;
+  @include font($font-family: $font-text, $font-size: 2.5rem, $color: $color-text);
+  text-align: center;
+}
