@@ -8,6 +8,7 @@ export default class KeyboardLogic {
     this.ctrlPressed = '';
     this.altPressed = '';
     this.PARAGRAPHS = PARAGRAPHS;
+    this.mouseDownButton = null;
   }
 
   buttonDownHandler() {
@@ -45,6 +46,7 @@ export default class KeyboardLogic {
   mouseDownHandler() {
     document.addEventListener('mousedown', (event) => {
       const keyboardButton = event.target.closest('.keyboard__button');
+      this.mouseDownButton = keyboardButton;
       if (!keyboardButton) return;
       const buttonCode = keyboardButton.dataset.BtnCode;
       this.downHandler(keyboardButton, buttonCode);
@@ -54,9 +56,22 @@ export default class KeyboardLogic {
   mouseUpHandler() {
     document.addEventListener('mouseup', (event) => {
       const keyboardButton = event.target.closest('.keyboard__button');
-      if (!keyboardButton) return;
-      const buttonCode = keyboardButton.dataset.BtnCode;
-      this.upHandler(keyboardButton, buttonCode);
+      // to prevent fast mouse leaving without active removing
+      if (this.mouseDownButton) {
+        if (!keyboardButton) {
+          this.mouseDownButton.classList.remove('keyboard__button_active');
+          console.log(this.mouseDownButton);
+          console.log(keyboardButton);
+          return;
+        }
+        if (this.mouseDownButton !== keyboardButton) {
+          this.mouseDownButton.classList.remove('keyboard__button_active');
+          console.log(this.mouseDownButton);
+          console.log(keyboardButton);
+        }
+        const buttonCode = keyboardButton.dataset.BtnCode;
+        this.upHandler(keyboardButton, buttonCode);
+      }
     });
   }
 
