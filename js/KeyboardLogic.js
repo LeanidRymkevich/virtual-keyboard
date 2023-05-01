@@ -49,6 +49,7 @@ export default class KeyboardLogic {
       const keyboardButton = event.target.closest('.keyboard__button');
       this.mouseDownButton = keyboardButton;
       if (!keyboardButton) return;
+      this.repeat = event.repeat;
       const buttonCode = keyboardButton.dataset.BtnCode;
       this.downHandler(keyboardButton, buttonCode);
     });
